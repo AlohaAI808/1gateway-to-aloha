@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hidden Gems of Hawaii - Interactive Guide | Gateway to Aloha</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <style>
+        .island-tab.active {
+            background: linear-gradient(135deg, #3b82f6, #10b981);
+            color: white;
+        }
+        
+        .gem-card {
+            transition: all 0.3s ease;
+        }
+        
+        .gem-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .difficulty-easy { background: #10b981; }
+        .difficulty-moderate { background: #f59e0b; }
+        .difficulty-challenging { background: #ef4444; }
+        
+        .map-container {
+            height: 400px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.8), rgba(16, 185, 129, 0.8)), 
+                        url('https://res.cloudinary.com/dimqqmfx6/image/upload/v1757528663/nanobanana_generated_15913_1757528663_0_f8x4av.jpg') center/cover;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Password Protection -->
+    <div id="passwordModal" class="fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 text-center">
+            <div class="mb-6">
+                <i class="fas fa-lock text-4xl text-blue-600 mb-4"></i>
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">Access Your FREE Guide</h2>
+                <p class="text-gray-600">Enter the password from your email to unlock Hawaii's hidden gems</p>
+            </div>
+            
+            <input type="password" id="passwordInput" placeholder="Enter password" 
+                   class="w-full px-4 py-3 border border-gray-300 rounded-lg mb-4 focus:ring-2 focus:ring-blue-500">
+            
+            <button onclick="checkPassword()" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700">
+                Unlock Guide
+            </button>
+            
+            <p class="text-sm text-gray-500 mt-4">
+                Don't have the password? <a href="/" class="text-blue-600 hover:underline">Get your free guide here</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="hero-bg text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                Hidden Gems of Hawaii
+            </h1>
+            <p class="text-xl md:text-2xl opacity-90 mb-8">
+                Your Interactive Island-by-Island Secret Guide
+            </p>
+            <div class="flex justify-center items-center space-x-6 text-sm">
+                <div class="flex items-center">
+                    <i class="fas fa-map-marked-alt mr-2"></i>
+                    <span>23 Secret Locations</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-compass mr-2"></i>
+                    <span>GPS Coordinates</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-clock mr-2"></i>
+                    <span>Best Times to Visit</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Island Tabs -->
+    <div class="bg-white shadow-lg sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex overflow-x-auto py-4 space-x-2">
+                <button onclick="showIsland('oahu')" class="island-tab active px-6 py-3 rounded-full font-semibold whitespace-nowrap transition-all">
+                    🏄‍♂️ Oahu
+                </button>
+                <button onclick="showIsland('maui')" class="island-tab px-6 py-3 rounded-full font-semibold whitespace-nowrap transition-all bg-gray-100 hover:bg-gray-200">
+                    🌺 Maui
+                </button>
+                <button onclick="showIsland('bigisland')" class="island-tab px-6 py-3 rounded-full font-semibold whitespace-nowrap transition-all bg-gray-100 hover:bg-gray-200">
+                    🌋 Big Island
+                </button>
+                <button onclick="showIsland('kauai')" class="island-tab px-6 py-3 rounded-full font-semibold whitespace-nowrap transition-all bg-gray-100 hover:bg-gray-200">
+                    🌿 Kauai
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Container -->
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        
+        <!-- Oahu Section -->
+        <div id="oahu" class="island-content">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">🏄‍♂️ Oahu - The Gathering Place</h2>
+                <p class="text-lg text-gray-600 mb-6">6 hidden spots that most tourists never discover on the most populated island.</p>
+                
+                <!-- Interactive Map -->
+                <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+                    <h3 class="text-xl font-semibold mb-4">Interactive Map - Oahu Hidden Gems</h3>
+                    <div id="oahu-map" class="map-container"></div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Lanikai Pillbox -->
+                <div class="gem-card bg-white rounded-xl shadow-lg overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=250&q=80" 
+                         alt="Lanikai Pillbox Hike" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold">Lanikai Pillbox Hike</h3>
+                            <span class="difficulty-moderate text-white text-xs px-2 py-1 rounded-full">Moderate</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">360° views of Kailua Bay and offshore islands from WWII bunkers.</p>
+                        
+                        <div class="space-y-2 text-sm">
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt text-blue-600 mr-2"></i>
+                                <span class="font-mono">21.3969° N, 157.7381° W</span>
+                                <button onclick="copyGPS('21.3969,-157.7381')" class="ml-2 text-blue-600 hover:text-blue-800">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-clock text-green-600 mr-2"></i>
+                                <span>Best Time: Sunrise (6:30-7:30 AM)</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-hiking text-orange-600 mr-2"></i>
+                                <span>30-minute hike</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
+                            <div class="flex items-start">
+                                <i class="fas fa-lightbulb text-yellow-600 mr-2 mt-1"></i>
+                                <div>
+                                    <p class="text-sm font-semibold text-yellow-800">Insider Tip:</p>
+                                    <p class="text-sm text-yellow-700">Park at Kailua Beach Park, walk through neighborhood to trailhead. Bring water and wear good shoes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spitting Cave -->
+                <div class="gem-card bg-white rounded-xl shadow-lg overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=250&q=80" 
+                         alt="Spitting Cave" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold">Spitting Cave of Portlock</h3>
+                            <span class="difficulty-easy text-white text-xs px-2 py-1 rounded-full">Easy</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Dramatic blowhole effect with crashing waves against lava rock formations.</p>
+                        
+                        <div class="space-y-2 text-sm">
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt text-blue-600 mr-2"></i>
+                                <span class="font-mono">21.2588° N, 157.6929° W</span>
+                                <button onclick="copyGPS('21.2588,-157.6929')" class="ml-2 text-blue-600 hover:text-blue-800">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-clock text-green-600 mr-2"></i>
+                                <span>Best Time: High tide</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-walking text-orange-600 mr-2"></i>
+                                <span>Easy walk, dangerous swimming</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 p-3 bg-red-50 rounded-lg">
+                            <div class="flex items-start">
+                                <i class="fas fa-exclamation-triangle text-red-600 mr-2 mt-1"></i>
+                                <div>
+                                    <p class="text-sm font-semibold text-red-800">Safety Warning:</p>
+                                    <p class="text-sm text-red-700">Stay back from edge - waves can be unpredictable and dangerous.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Continue with other Oahu spots... -->
+                <!-- Makapuu Tide Pools -->
+                <div class="gem-card bg-white rounded-xl shadow-lg overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=250&q=80" 
+                         alt="Makapuu Tide Pools" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold">Makapuu Tide Pools</h3>
+                            <span class="difficulty-easy text-white text-xs px-2 py-1 rounded-full">Easy</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Natural aquarium with tropical fish in crystal-clear tide pools.</p>
+                        
+                        <div class="space-y-2 text-sm">
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt text-blue-600 mr-2"></i>
+                                <span class="font-mono">21.3099° N, 157.6496° W</span>
+                                <button onclick="copyGPS('21.3099,-157.6496')" class="ml-2 text-blue-600 hover:text-blue-800">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-clock text-green-600 mr-2"></i>
+                                <span>Best Time: Low tide (morning)</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                            <div class="flex items-start">
+                                <i class="fas fa-fish text-blue-600 mr-2 mt-1"></i>
+                                <div>
+                                    <p class="text-sm font-semibold text-blue-800">Snorkeling Tip:</p>
+                                    <p class="text-sm text-blue-700">Bring reef-safe sunscreen and water shoes for the best experience.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add more Oahu gems here... -->
+            </div>
+        </div>
+
+        <!-- Other islands content would follow similar pattern -->
+        <div id="maui" class="island-content hidden">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">🌺 Maui - The Valley Isle</h2>
+            <p class="text-lg text-gray-600 mb-6">Coming soon - 6 incredible hidden spots on the Valley Isle...</p>
+        </div>
+
+        <div id="bigisland" class="island-content hidden">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">🌋 Big Island - The Big Island</h2>
+            <p class="text-lg text-gray-600 mb-6">Coming soon - 6 volcanic wonders and secret beaches...</p>
+        </div>
+
+        <div id="kauai" class="island-content hidden">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">🌿 Kauai - The Garden Isle</h2>
+            <p class="text-lg text-gray-600 mb-6">Coming soon - 5 pristine natural wonders...</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 mt-16">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h3 class="text-xl font-bold mb-2">🌺 Gateway to Aloha</h3>
+            <p class="text-gray-400 mb-4">Your trusted guide to authentic Hawaiian experiences</p>
+            <p class="text-sm text-gray-500">© 2024 Gateway to Aloha. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Password protection
+        function checkPassword() {
+            const password = document.getElementById('passwordInput').value;
+            if (password === 'aloha2024' || password === 'hiddengemshawaii') {
+                document.getElementById('passwordModal').style.display = 'none';
+                initializeMaps();
+            } else {
+                alert('Incorrect password. Please check your email for the correct password.');
+            }
+        }
+
+        // Island navigation
+        function showIsland(island) {
+            // Hide all island content
+            document.querySelectorAll('.island-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.island-tab').forEach(tab => {
+                tab.classList.remove('active');
+                tab.classList.add('bg-gray-100', 'hover:bg-gray-200');
+            });
+            
+            // Show selected island
+            document.getElementById(island).classList.remove('hidden');
+            
+            // Activate selected tab
+            event.target.classList.add('active');
+            event.target.classList.remove('bg-gray-100', 'hover:bg-gray-200');
+        }
+
+        // Copy GPS coordinates
+        function copyGPS(coords) {
+            navigator.clipboard.writeText(coords).then(() => {
+                // Show temporary success message
+                const button = event.target;
+                const originalIcon = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check"></i>';
+                button.classList.add('text-green-600');
+                
+                setTimeout(() => {
+                    button.innerHTML = originalIcon;
+                    button.classList.remove('text-green-600');
+                }, 2000);
+            });
+        }
+
+        // Initialize maps
+        function initializeMaps() {
+            // Oahu map
+            const oahuMap = L.map('oahu-map').setView([21.3099, -157.8581], 10);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(oahuMap);
+            
+            // Add markers for Oahu gems
+            const oahuGems = [
+                {lat: 21.3969, lng: -157.7381, name: 'Lanikai Pillbox', desc: 'Sunrise views'},
+                {lat: 21.2588, lng: -157.6929, name: 'Spitting Cave', desc: 'Dramatic blowhole'},
+                {lat: 21.3099, lng: -157.6496, name: 'Makapuu Tide Pools', desc: 'Natural aquarium'}
+            ];
+            
+            oahuGems.forEach(gem => {
+                L.marker([gem.lat, gem.lng])
+                    .addTo(oahuMap)
+                    .bindPopup(`<b>${gem.name}</b><br>${gem.desc}`);
+            });
+        }
+
+        // Check for password on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // You could check for a URL parameter or localStorage here
+            // For now, always show password modal
+        });
+    </script>
+</body>
+</html>
