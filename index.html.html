@@ -1,0 +1,173 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Everything Aloha - Your Complete Hawaii Travel Guide</title>
+    <meta name="description" content="Plan your perfect Hawaiian vacation with guides to Maui, Oahu, Kauai, Big Island, Lanai, and Molokai. Local tips, hidden gems, and travel advice.">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.5/cdn.min.js" defer></script>
+</head>
+<body>
+    <header class="sticky top-0 bg-white shadow-md z-50" x-data="{ isOpen: false }">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-baseline space-x-2">
+                <h1 class="text-2xl font-bold text-blue-600">Everything Aloha</h1>
+                <p class="text-xs text-gray-500">Your gateway to Hawaii!</p>
+            </div>
+            <div class="flex items-center space-x-8">
+                <input type="search" placeholder="Search islands, activities, or blog posts..." class="w-80 px-4 py-2 border rounded-lg">
+                <nav class="flex space-x-8">
+                    <a href="/" class="text-blue-600">Home</a>
+                    <div class="relative">
+                        <button class="flex items-center space-x-1 text-blue-600" @click="isOpen = !isOpen">
+                            <span>Islands</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div x-show="isOpen" class="absolute top-full right-0 w-48 bg-white shadow-lg rounded-lg py-2">
+                            <a href="/maui" class="block px-4 py-2 hover:bg-gray-100">Maui</a>
+                            <a href="/oahu" class="block px-4 py-2 hover:bg-gray-100">Oahu</a>
+                            <a href="/kauai" class="block px-4 py-2 hover:bg-gray-100">Kauai</a>
+                            <a href="/big-island" class="block px-4 py-2 hover:bg-gray-100">Big Island</a>
+                            <a href="/lanai" class="block px-4 py-2 hover:bg-gray-100">Lanai</a>
+                            <a href="/molokai" class="block px-4 py-2 hover:bg-gray-100">Molokai</a>
+                        </div>
+                    </div>
+                    <a href="/blog" class="text-blue-600">Blog</a>
+                    <a href="/about" class="text-blue-600">About</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="relative h-96 bg-blue-600">
+        <div class="absolute inset-0 bg-black/40"></div>
+        <div class="relative z-10 h-full flex flex-col items-center justify-center text-white p-4">
+            <h1 class="text-5xl font-bold mb-4">Everything Aloha</h1>
+            <p class="text-xl mb-8">Your Complete Guide to Hawaiian Paradise</p>
+            <button class="bg-yellow-400 text-black px-8 py-3 rounded-lg font-semibold hover:bg-yellow-300 transition">
+                Start Planning
+            </button>
+        </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto p-6 mt-12">
+        <h2 class="text-3xl font-bold mb-8 text-center">Explore Hawaiian Islands</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="overflow-hidden shadow-lg hover:shadow-xl transition rounded-lg">
+                <img src="http://via.placeholder.com/300x200" alt="Maui" class="w-full h-48 object-cover">
+                <div class="p-6 bg-gradient-to-b from-black/60 to-black/0 relative -mt-24">
+                    <h3 class="text-2xl font-bold text-white mb-2">Maui</h3>
+                    <p class="text-gray-200 mb-4">Valley Isle with pristine beaches and Haleakala sunrise</p>
+                    <a href="/maui" class="text-blue-400 hover:text-blue-300">Explore Maui →</a>
+                </div>
+            </div>
+            <div class="overflow-hidden shadow-lg hover:shadow-xl transition rounded-lg">
+                <img src="http://via.placeholder.com/300x200" alt="Oahu" class="w-full h-48 object-cover">
+                <div class="p-6 bg-gradient-to-b from-black/60 to-black/0 relative -mt-24">
+                    <h3 class="text-2xl font-bold text-white mb-2">Oahu</h3>
+                    <p class="text-gray-200 mb-4">Gathering Place with Waikiki and North Shore</p>
+                    <a href="/oahu" class="text-blue-400 hover:text-blue-300">Explore Oahu →</a>
+                </div>
+            </div>
+            <div class="overflow-hidden shadow-lg hover:shadow-xl transition rounded-lg">
+                <img src="http://via.placeholder.com/300x200" alt="Kauai" class="w-full h-48 object-cover">
+                <div class="p-6 bg-gradient-to-b from-black/60 to-black/0 relative -mt-24">
+                    <h3 class="text-2xl font-bold text-white mb-2">Kauai</h3>
+                    <p class="text-gray-200 mb-4">Garden Isle with Na Pali Coast and Waimea Canyon</p>
+                    <a href="/kauai" class="text-blue-400 hover:text-blue-300">Explore Kauai →</a>
+                </div>
+            </div>
+            <div class="overflow-hidden shadow-lg hover:shadow-xl transition rounded-lg">
+                <img src="http://via.placeholder.com/300x200" alt="Big Island" class="w-full h-48 object-cover">
+                <div class="p-6 bg-gradient-to-b from-black/60 to-black/0 relative -mt-24">
+                    <h3 class="text-2xl font-bold text-white mb-2">Big Island</h3>
+                    <p class="text-gray-200 mb-4">Active volcanoes and diverse landscapes</p>
+                    <a href="/big-island" class="text-blue-400 hover:text-blue-300">Explore Big Island →</a>
+                </div>
+            </div>
+            <div class="overflow-hidden shadow-lg hover:shadow-xl transition rounded-lg">
+                <img src="http://via.placeholder.com/300x200" alt="Lanai" class="w-full h-48 object-cover">
+                <div class="p-6 bg-gradient-to-b from-black/60 to-black/0 relative -mt-24">
+                    <h3 class="text-2xl font-bold text-white mb-2">Lanai</h3>
+                    <p class="text-gray-200 mb-4">Private Isle with luxury resorts and serenity</p>
+                    <a href="/lanai" class="text-blue-400 hover:text-blue-300">Explore Lanai →</a>
+                </div>
+            </div>
+            <div class="overflow-hidden shadow-lg hover:shadow-xl transition rounded-lg">
+                <img src="http://via.placeholder.com/300x200" alt="Molokai" class="w-full h-48 object-cover">
+                <div class="p-6 bg-gradient-to-b from-black/60 to-black/0 relative -mt-24">
+                    <h3 class="text-2xl font-bold text-white mb-2">Molokai</h3>
+                    <p class="text-gray-200 mb-4">Authentic Hawaiian culture and untouched beauty</p>
+                    <a href="/molokai" class="text-blue-400 hover:text-blue-300">Explore Molokai →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-blue-600 text-white py-16">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
+            <p class="mb-8">Get the latest Hawaii travel tips and exclusive deals delivered to your inbox</p>
+            <form class="max-w-md mx-auto flex gap-4">
+                <input 
+                    type="email"
+                    placeholder="Enter your email"
+                    class="flex-1 px-4 py-2 rounded-lg text-black"
+                    required
+                >
+                <button type="submit" class="bg-yellow-400 text-black px-6 py-2 rounded-lg font-semibold hover:bg-yellow-300">
+                    Subscribe
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="font-bold text-lg mb-4">Everything Aloha</h3>
+                <p class="text-gray-400">Your complete guide to exploring Hawaii</p>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Islands</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="/maui" class="hover:text-white">Maui</a></li>
+                    <li><a href="/oahu" class="hover:text-white">Oahu</a></li>
+                    <li><a href="/kauai" class="hover:text-white">Kauai</a></li>
+                    <li><a href="/big-island" class="hover:text-white">Big Island</a></li>
+                    <li><a href="/lanai" class="hover:text-white">Lanai</a></li>
+                    <li><a href="/molokai" class="hover:text-white">Molokai</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Resources</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="/blog" class="hover:text-white">Blog</a></li>
+                    <li><a href="/about" class="hover:text-white">About Us</a></li>
+                    <li><a href="/contact" class="hover:text-white">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Connect</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="#" class="hover:text-white">Facebook</a></li>
+                    <li><a href="#" class="hover:text-white">Instagram</a></li>
+                    <li><a href="#" class="hover:text-white">Twitter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-6xl mx-auto px-6 mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
+            <p>© 2024 Everything Aloha. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+        });
+    </script>
+</body>
+</html>
