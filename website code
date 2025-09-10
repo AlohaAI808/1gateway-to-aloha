@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gateway to Aloha - Your Hawaii Experience Guide</title>
+    <meta name="description" content="Discover authentic Hawaii experiences, accommodations, and insider tips. Your gateway to the perfect Hawaiian adventure starts here.">
+    
+    <!-- FTC Compliance Notice -->
+    <script>
+        // Display affiliate disclosure prominently
+        window.addEventListener('load', function() {
+            const disclosure = document.createElement('div');
+            disclosure.innerHTML = `
+                <div style="background: #fef3c7; border: 2px solid #f59e0b; padding: 10px; margin: 10px 0; border-radius: 8px; font-size: 14px;">
+                    <strong>Affiliate Disclosure:</strong> This website contains affiliate links. I may earn a commission when you click on links or make purchases through them, at no additional cost to you. This helps support the site and allows me to continue providing valuable Hawaii travel information.
+                </div>
+            `;
+            document.body.insertBefore(disclosure, document.body.firstChild);
+        });
+    </script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.9) 0%, rgba(16, 185, 129, 0.9) 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 2s infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.4); }
+            50% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.8); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-50 top-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-blue-600">🌺 Gateway to Aloha</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#experiences" class="text-gray-700 hover:text-blue-600 transition-colors">Experiences</a>
+                    <a href="#accommodations" class="text-gray-700 hover:text-blue-600 transition-colors">Stay</a>
+                    <a href="#guides" class="text-gray-700 hover:text-blue-600 transition-colors">Guides</a>
+                    <button onclick="openEmailModal()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        Get Free Guide
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center hero-gradient">
+        <div class="absolute inset-0">
+            <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" 
+                 alt="Hawaii Paradise" class="w-full h-full object-cover">
+            <div class="absolute inset-0 hero-gradient"></div>
+        </div>
+        
+        <div class="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6">
+                Your Gateway to <span class="text-yellow-300">Aloha</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 opacity-90">
+                Discover authentic Hawaiian experiences, accommodations, and insider tips from someone who's explored every island.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="openEmailModal()" class="bg-yellow-400 text-gray-900 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-yellow-300 transition-all pulse-glow">
+                    <i class="fas fa-download mr-2"></i>Get My FREE Hawaii Guide
+                </button>
+                <button onclick="scrollToSection('experiences')" class="border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-gray-900 transition-all">
+                    Explore Experiences
+                </button>
+            </div>
+            
+            <!-- Trust Indicators -->
+            <div class="mt-12 flex flex-wrap justify-center items-center gap-8 opacity-80">
+                <div class="flex items-center">
+                    <i class="fas fa-heart text-yellow-300 mr-2"></i>
+                    <span>Personally Tested</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-map-marked-alt text-yellow-300 mr-2"></i>
+                    <span>Local Insider Knowledge</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-shield-alt text-yellow-300 mr-2"></i>
+                    <span>Honest Recommendations</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium Experiences Section -->
+    <section id="experiences" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    Recommended Hawaiian Experiences
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Hand-picked adventures I've personally experienced and recommend. <em>Note: I may earn a commission if you book through these links.</em>
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Experience Card 1 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                    <img src="https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250&q=80" 
+                         alt="Volcano Helicopter Tour" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="bg-red-100 text-red-800 text-xs font-semibold px-2 py-1 rounded-full">RECOMMENDED</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Volcano Helicopter Tours</h3>
+                        <p class="text-gray-600 mb-4">Experience the raw power of Kilauea volcano from above. I've taken this tour twice - absolutely breathtaking!</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-lg text-gray-600">From $299</span>
+                            <a href="#" onclick="trackClick('volcano-helicopter')" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                View Options
+                            </a>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">*Affiliate link - I may earn a commission</p>
+                    </div>
+                </div>
+                
+                <!-- Experience Card 2 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250&q=80" 
+                         alt="Waterfall Hike" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 rounded-full">HIDDEN GEM</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Guided Waterfall Hikes</h3>
+                        <p class="text-gray-600 mb-4">Discover waterfalls off the beaten path. These guided tours take you to spots most tourists never see.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-lg text-gray-600">From $89</span>
+                            <a href="#" onclick="trackClick('waterfall-hike')" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                View Options
+                            </a>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">*Affiliate link - I may earn a commission</p>
+                    </div>
+                </div>
+                
+                <!-- Experience Card 3 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                    <img src="https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250&q=80" 
+                         alt="Sunset Sailing" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="bg-purple-100 text-purple-800 text-xs font-semibold px-2 py-1 rounded-full">ROMANTIC</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Sunset Sailing Tours</h3>
+                        <p class="text-gray-600 mb-4">Perfect for couples or anyone wanting to see Hawaii from the water. The sunset views are unforgettable.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-lg text-gray-600">From $199</span>
+                            <a href="#" onclick="trackClick('sunset-sailing')" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                View Options
+                            </a>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">*Affiliate link - I may earn a commission</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Accommodations -->
+    <section id="accommodations" class="py-20 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    Where I Recommend Staying
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Accommodations I've personally stayed at or thoroughly researched. <em>Booking through these links helps support this site.</em>
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Accommodation 1 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=300&q=80" 
+                         alt="Beachfront Rentals" class="w-full h-64 object-cover">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Beachfront Vacation Rentals</h3>
+                        <p class="text-gray-600 mb-6">Private homes and condos right on the beach. Perfect for families or groups wanting space and privacy.</p>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-2xl font-bold text-green-600">From $200</span>
+                                <span class="text-gray-500">/night</span>
+                            </div>
+                        </div>
+                        <a href="#" onclick="trackClick('beachfront-rentals')" class="w-full bg-blue-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors block text-center">
+                            Browse Rentals
+                        </a>
+                        <p class="text-xs text-gray-500 mt-2 text-center">*Affiliate link - I may earn a commission</p>
+                    </div>
+                </div>
+                
+                <!-- Accommodation 2 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                    <img src="https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=300&q=80" 
+                         alt="Boutique Hotels" class="w-full h-64 object-cover">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Boutique Hotels & Resorts</h3>
+                        <p class="text-gray-600 mb-6">Carefully selected hotels that offer authentic Hawaiian hospitality and unique experiences.</p>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-2xl font-bold text-green-600">From $300</span>
+                                <span class="text-gray-500">/night</span>
+                            </div>
+                        </div>
+                        <a href="#" onclick="trackClick('boutique-hotels')" class="w-full bg-blue-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors block text-center">
+                            View Hotels
+                        </a>
+                        <p class="text-xs text-gray-500 mt-2 text-center">*Affiliate link - I may earn a commission</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FREE Guides Section -->
+    <section id="guides" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    My FREE Hawaii Travel Guides
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Detailed guides based on my personal experiences exploring Hawaii - completely free.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Guide 1 - FREE -->
+                <div class="bg-gradient-to-br from-blue-50 to-green-50 rounded-2xl p-8 text-center card-hover">
+                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-map-marked-alt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Hidden Spots Guide</h3>
+                    <p class="text-gray-600 mb-6">My personal collection of lesser-known beaches, viewpoints, and local favorites.</p>
+                    <div class="mb-6">
+                        <span class="text-2xl font-bold text-green-600">FREE</span>
+                    </div>
+                    <button onclick="openEmailModal('hidden-gems')" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                        Get Free Guide
+                    </button>
+                </div>
+                
+                <!-- Guide 2 - FREE -->
+                <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 text-center card-hover">
+                    <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-utensils text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Local Food Guide</h3>
+                    <p class="text-gray-600 mb-6">Where locals actually eat - from food trucks to fine dining, all personally tested.</p>
+                    <div class="mb-6">
+                        <span class="text-2xl font-bold text-green-600">FREE</span>
+                    </div>
+                    <button onclick="openEmailModal('food-guide')" class="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors">
+                        Get Free Guide
+                    </button>
+                </div>
+                
+                <!-- Guide 3 - FREE -->
+                <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-8 text-center card-hover">
+                    <div class="w-16 h-16 bg-yellow-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-camera text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Photography Spots</h3>
+                    <p class="text-gray-600 mb-6">Best photo locations with exact coordinates and optimal timing for lighting.</p>
+                    <div class="mb-6">
+                        <span class="text-2xl font-bold text-green-600">FREE</span>
+                    </div>
+                    <button onclick="openEmailModal('photo-guide')" class="w-full bg-yellow-600 text-white py-3 rounded-lg font-semibold hover:bg-yellow-700 transition-colors">
+                        Get Free Guide
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Email Modal -->
+    <div id="emailModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4">
+            <div class="text-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">Get Your FREE Hawaii Guide</h3>
+                <p class="text-gray-600">Join thousands of travelers who've discovered Hawaii's hidden gems!</p>
+            </div>
+            
+            <form id="emailForm" onsubmit="submitEmail(event)">
+                <div class="mb-4">
+                    <input type="email" id="emailInput" placeholder="Enter your email address" 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                
+                <div class="mb-6">
+                    <label class="flex items-center">
+                        <input type="checkbox" class="mr-2" required>
+                        <span class="text-sm text-gray-600">I agree to receive travel tips and recommendations via email.</span>
+                    </label>
+                </div>
+                
+                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                    Send Me The Free Guide
+                </button>
+            </form>
+            
+            <button onclick="closeEmailModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">🌺 Gateway to Aloha</h3>
+                    <p class="text-gray-400">Your trusted guide to authentic Hawaiian experiences.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#experiences" class="hover:text-white transition-colors">Experiences</a></li>
+                        <li><a href="#accommodations" class="hover:text-white transition-colors">Accommodations</a></li>
+                        <li><a href="#guides" class="hover:text-white transition-colors">Free Guides</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Affiliate Disclosure</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-tiktok text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Gateway to Aloha. All rights reserved. | Made with aloha in Hawaii 🌺</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Email Modal Functions
+        function openEmailModal(guide = '') {
+            document.getElementById('emailModal').classList.remove('hidden');
+            if (guide) {
+                // Track which guide was requested
+                console.log('Guide requested:', guide);
+            }
+        }
+        
+        function closeEmailModal() {
+            document.getElementById('emailModal').classList.add('hidden');
+        }
+        
+        function submitEmail(event) {
+            event.preventDefault();
+            const email = document.getElementById('emailInput').value;
+            
+            // Here you would integrate with your email service (Lindy AI)
+            console.log('Email submitted:', email);
+            
+            // Show success message
+            alert('Thank you! Your free guide will be sent to your email shortly.');
+            closeEmailModal();
+        }
+        
+        // Smooth scrolling
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+        
+        // Track affiliate clicks
+        function trackClick(item) {
+            console.log('Affiliate click tracked:', item);
+            // Here you would send tracking data to your analytics
+        }
+        
+        // Close modal when clicking outside
+        document.getElementById('emailModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeEmailModal();
+            }
+        });
+    </script>
+</body>
+</html>
